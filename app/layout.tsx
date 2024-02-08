@@ -1,11 +1,29 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import "./globals.scss";
+import { Inter } from 'next/font/google'
+ 
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+})
 
-const fontPrimary = localFont({ src: "/ui/fonts/ClashGrotesk-variable.ttf" });
-const fontSecondary = localFont({
-  src: "/ui/fonts/Sora-VariableFont_wght.ttf",
+const GTsuper = localFont({
+  src: [
+    {
+      path: "/ui/fonts/GT-Super-Text-Regular-Trial.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "/ui/fonts/GT-Super-Text-Bold-Trial.otf",
+      weight: "700",
+      style: "normal",
+    }
+  ],
 });
+
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,12 +36,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${fontPrimary.className} overflow-auto`}>
-      <body className="w-screen bg-gradient-to-l from-slate-900 to-portafolio-cuaternario overflow-x-hidden">
+    <html lang="en" className={`${GTsuper.className} overflow-auto snap-y scroll-smooth`}>
+      <body className="py-6">
         {children}
       </body>
     </html>
   );
 }
 
-export { fontPrimary, fontSecondary };
+export { GTsuper, inter };

@@ -1,13 +1,20 @@
- import React from 'react'
+import React from "react";
 
-import Intro from './components/Intro/Intro'
-import About from './components/About/About'
+import Intro from "./components/Intro/Intro";
+import About from "./components/About/About";
+import Experience from "./components/Experience/Experience";
+import Projects from "./components/Projects/Projects";
+import Header from "./components/Header/Header";
 
-export default async function LandingPage(){
+export default async function LandingPage() {
   return (
-    <div>
-        <Intro></Intro>
-        <About></About>
-    </div>
-  )
+    <>
+      <Header></Header>
+      <Intro></Intro>
+      <About></About>
+      <Experience></Experience>
+      <Projects></Projects>
+    
+    </>
+  );
 }

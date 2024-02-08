@@ -1,7 +1,6 @@
+"use client";
 import Image from "next/image";
-import React from "react";
-import fotoPerfil from "@/public/images/foto-perfil-linkedin.jpg";
-import hobbieAbout from "@/public/images/hobbie.png";
+import React, { useEffect, useRef, useState } from "react";
 import {
   FaBootstrap,
   FaCss3Alt,
@@ -18,141 +17,385 @@ import {
 } from "react-icons/si";
 import { BiLogoPostgresql } from "react-icons/bi";
 import { TbBrandNextjs } from "react-icons/tb";
+import PhotoPerfil from "@/app/public/images/foto-perfil-linkedin.jpg";
+import E from "@/app/public/images/E.svg";
+import { EnvelopeIcon } from "@heroicons/react/16/solid";
+import Link from "next/link";
+import clsx from "clsx";
+
 const About = () => {
+  const [isSticky, setIsSticky] = useState(false);
+  const photoPerfilRef = useRef(null);
+  const aboutMeRef = useRef(null);
+  const [scrollPercentage, setScrollPercentage] = useState(0);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleScroll = () => {
+    
+    const scrollPosition = window.scrollY + window.innerHeight;
+    const photoPerfilPosition =
+      photoPerfilRef.current.offsetTop + photoPerfilRef.current.offsetHeight;
+    const elementPosition = aboutMeRef.current.offsetTop;
+    const elementHeight = aboutMeRef.current.offsetHeight;
+    const scrollPercentage = (scrollPosition - elementPosition) / elementHeight;
+    setIsSticky(scrollPosition < photoPerfilPosition);
+    setScrollPercentage(scrollPercentage);
+    console.log(scrollPercentage);
+  };
   const languages = [
     {
-      icon: <FaHtml5 className="text-4xl md:text-5xl lg:text-6-xl text-white bg-transparent w-8 lg:w-20" />,
-      name: "HTML",
-    },
-    {
-      icon: <FaCss3Alt className="text-4xl md:text-5xl lg:text-6-xl text-white bg-transparent w-8 lg:w-20" />,
-      name: "CSS",
-    },
-    {
-      icon: <SiJavascript className="text-4xl md:text-5xl lg:text-6-xl text-white bg-transparent w-8 lg:w-20" />,
-      name: "JavaScript",
-    },
-    {
-      icon: <FaBootstrap className="text-4xl md:text-5xl lg:text-6-xl text-white bg-transparent w-10 lg:w-20" />,
-      name: "Bootstrap",
+      icon: (
+        <FaHtml5
+          className={clsx(
+            "text-4xl text-portafolio-septimo opacity-10 duration-1000 bg-transparent w-8",
+            {
+              "opacity-90": scrollPercentage >= 0.8,
+            }
+          )}
+        />
+      ),
+      name: <p
+      className={clsx(
+        "text-portafolio-septimo opacity-10 duration-1000 text-center text-md opacity-10",
+        {
+          "opacity-90": scrollPercentage >= 0.8,
+        }
+      )}
+    >
+      HTML
+    </p>,
     },
     {
       icon: (
-        <SiTailwindcss className="text-4xl md:text-5xl lg:text-6-xl text-white bg-transparent w-8 lg:w-20" />
+        <FaCss3Alt
+          className={clsx(
+            "text-4xl text-portafolio-septimo opacity-10 duration-1000 bg-transparent w-8",
+            {
+              "opacity-90": scrollPercentage >= 0.8,
+            }
+          )}
+        />
       ),
-      name: "Tailwind",
-    },
-    {
-      icon: <SiGraphql className="text-4xl md:text-5xl lg:text-6-xl text-white bg-transparent w-8 lg:w-20" />,
-      name: "GraphQL",
+      name: <p
+      className={clsx(
+        "text-portafolio-septimo opacity-10 duration-1000 text-center text-md opacity-10",
+        {
+          "opacity-90": scrollPercentage >= 0.8,
+        }
+      )}
+    >
+      CSS
+    </p>,
     },
     {
       icon: (
-        <BiLogoPostgresql className="text-4xl md:text-5xl lg:text-6-xl text-white bg-transparent w-8 lg:w-20" />
+        <SiJavascript
+          className={clsx(
+            "text-4xl text-portafolio-septimo opacity-10 duration-1000 bg-transparent w-8",
+            {
+              "opacity-90": scrollPercentage >= 0.85,
+            }
+          )}
+        />
       ),
-      name: "PostgreSQL",
-    },
-    {
-      icon: <FaReact className="text-4xl md:text-5xl lg:text-6-xl text-white bg-transparent w-8 lg:w-20" />,
-      name: "React",
+      name: <p
+      className={clsx(
+        "text-portafolio-septimo opacity-10 duration-1000 text-center text-md opacity-10",
+        {
+          "opacity-90": scrollPercentage >= 0.85,
+        }
+      )}
+    >
+      JavaScript
+    </p>,
     },
     {
       icon: (
-        <TbBrandNextjs className="text-4xl md:text-5xl lg:text-6-xl text-white bg-transparent w-8 lg:w-20" />
+        <FaBootstrap
+          className={clsx(
+            "text-4xl text-portafolio-septimo opacity-10 duration-1000 bg-transparent w-10",
+            {
+              "opacity-90": scrollPercentage >= 0.85,
+            }
+          )}
+        />
       ),
-      name: "NextJS",
+      name: <p
+      className={clsx(
+        "text-portafolio-septimo opacity-10 duration-1000 text-center text-md opacity-10",
+        {
+          "opacity-90": scrollPercentage >= 0.85,
+        }
+      )}
+    >
+      Bootstrap
+    </p>,
     },
     {
-      icon: <SiTypescript className="text-4xl md:text-5xl lg:text-6-xl text-white bg-transparent w-8 lg:w-20" />,
-      name: "TypeScript",
+      icon: (
+        <SiTailwindcss
+          className={clsx(
+            "text-4xl text-portafolio-septimo opacity-10 duration-1000 bg-transparent w-8",
+            {
+              "opacity-90": scrollPercentage >= 0.90,
+            }
+          )}
+        />
+      ),
+      name: <p
+      className={clsx(
+        "text-portafolio-septimo opacity-10 duration-1000 text-center text-md opacity-10",
+        {
+          "opacity-90": scrollPercentage >= 0.90,
+        }
+      )}
+    >
+      TailwindCss
+    </p>,
+    },
+    {
+      icon: (
+        <SiGraphql
+          className={clsx(
+            "text-4xl text-portafolio-septimo opacity-10 duration-1000 bg-transparent w-8",
+            {
+              "opacity-90": scrollPercentage >= 0.90,
+            }
+          )}
+        />
+      ),
+      name: <p
+      className={clsx(
+        "text-portafolio-septimo opacity-10 duration-1000 text-center text-md opacity-10",
+        {
+          "opacity-90": scrollPercentage >= 0.90,
+        }
+      )}
+    >
+      GraphQl
+    </p>,
+    },
+    {
+      icon: (
+        <BiLogoPostgresql
+          className={clsx(
+            "text-4xl text-portafolio-septimo opacity-10 duration-1000 bg-transparent w-8",
+            {
+              "opacity-90": scrollPercentage >= 0.90,
+            }
+          )}
+        />
+      ),
+      name: <p
+      className={clsx(
+        "text-portafolio-septimo opacity-10 duration-1000 text-center text-md opacity-10",
+        {
+          "opacity-90": scrollPercentage >= 0.90,
+        }
+      )}
+    >
+      PostgreSQL
+    </p>,
+    },
+    {
+      icon: (
+        <FaReact
+          className={clsx(
+            "text-4xl text-portafolio-septimo opacity-10 duration-1000 bg-transparent w-8",
+            {
+              "opacity-90": scrollPercentage >= 0.95,
+            }
+          )}
+        />
+      ),
+      name: <p
+      className={clsx(
+        "text-portafolio-septimo opacity-10 duration-1000 text-center text-md opacity-10",
+        {
+          "opacity-90": scrollPercentage >= 0.95,
+        }
+      )}
+    >
+      React
+    </p>,
+    },
+    {
+      icon: (
+        <TbBrandNextjs
+          className={clsx(
+            "text-4xl text-portafolio-septimo opacity-10 duration-1000 bg-transparent w-8",
+            {
+              "opacity-90": scrollPercentage >= 0.95,
+            }
+          )}
+        />
+      ),
+      name: <p
+      className={clsx(
+        "text-portafolio-septimo opacity-10 duration-1000 text-center text-md opacity-10",
+        {
+          "opacity-90": scrollPercentage >= 0.95,
+        }
+      )}
+    >
+      NextJS
+    </p>,
+    },
+    {
+      icon: (
+        <SiTypescript
+          className={clsx(
+            "text-4xl text-portafolio-septimo opacity-10 duration-1000 bg-transparent w-8",
+            {
+              "opacity-90": scrollPercentage >= 0.95,
+            }
+          )}
+        />
+      ),
+      name: <p
+      className={clsx(
+        "text-portafolio-septimo opacity-10 duration-1000 text-center text-md opacity-10",
+        {
+          "opacity-90": scrollPercentage >= 0.95,
+        }
+      )}
+    >
+      TypeScript
+    </p>,
     },
   ];
 
   return (
-    <div className="p-4 lg:py-6 lg:px-10 2xl:py-8 2xl:px-20 bg-portafolio-cuaternary min-h-screen flex flex-col justify-center w-full">
-      <h2 className="font-bold text-2xl text-center mb-2 text-portafolio-terciario md:text-4xl xl:text-5xl 2xl:text-7xl">
-        SOBRE MI
-      </h2>
-      <div className="p-2 w-full grid grid-cols-12 grid-rows-12 bg-about-background  bg-cover rounded-lg gap-5 justify-items-center">
-        <div className="background-about-box col-start-1 col-end-13 sm:col-end-8 md:col-end-8 p-4 rounded-lg">
-          <p className="bg-gradient-to-r from-portafolio-primario to-portafolio-secundario inline-block text-transparent bg-clip-text font-bold text-xl sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl">
-            Exequiel Bobruk
-          </p>
-          <p className="text-portafolio-terciario font-semibold text-base sm:text-lg md:text-xl xl:text-2xl 2xl:text-4xl">
-            Creatividad | Proactividad | Adaptabilidad
-          </p>
-          <p className="text-white font-regular text-sm sm:text-base md:text-lg xl:text-xl 2xl:text-3xl">
-            Tengo 23 años y soy estudiante de la{" "}
-            <span>Licenciatura en Informatica</span> en la Universidad de
-            Quilmes. Ademas de mis estudios formales, me dedico al aprendizaje
-            autodidacta para expandir mis conocimientos.
-          </p>
-        </div>
-        <div className="w-full col-start-2 col-end-8 sm:row-start-1 sm:row-end-2 sm:col-start-8 sm:col-end-13 md:col-start-8 md:col-end-10 ">
-          <div className="hidden sm:flex md:hidden text-center sm:justify-center w-full p-2 rounded-lg  bg-gradient-to-br from-portafolio-primario to-portafolio-secundario mb-2">
-            <p className="text-portafolio-terciario font-bold 2xl:text-xl ">
-              Desarrollador Full Stack
+    <section className="flex flex-col">
+      <div className="min-h-[200vh] about-me" ref={aboutMeRef}>
+        <div
+          className={clsx(
+            "sticky top-0  flex flex-col justify-center items-center gap-2 bg-portafolio-quinto p-6 min-h-screen ",
+            {
+              block: !isSticky,
+            }
+          )}
+        >
+          <h2
+            className={clsx(
+              "text-portafolio-septimo opacity-10 text-2xl font-bold duration-1000",
+              {
+                "opacity-90": scrollPercentage >= 0.5,
+              }
+            )}
+          >
+            Sobre mi
+          </h2>
+          <div className="flex flex-col gap-2 ">
+            <p
+              className={clsx(
+                "text-portafolio-septimo opacity-10 font-semibold text-center text-md transition-all duration-1000 ",
+                {
+                  "opacity-90": scrollPercentage >= 0.55,
+                }
+              )}
+            >
+              Creatividad | Proactividad | Adaptabilidad
+            </p>
+            <p className="text-portafolio-septimo text-center text-md">
+              <span
+                className={clsx("opacity-10  duration-1000", {
+                  "opacity-90": scrollPercentage >= 0.6,
+                })}
+              >
+                Tengo 23 años y
+              </span>
+              <span
+                className={clsx("opacity-10  duration-1000", {
+                  "opacity-90": scrollPercentage >= 0.63,
+                })}
+              >
+                soy estudiante de la Licenciatura en Informatica
+              </span>
+              <span
+                className={clsx("opacity-10  duration-1000", {
+                  "opacity-90": scrollPercentage >= 0.68,
+                })}
+              >
+                en la Universidad de Quilmes.
+              </span>{" "}
+              <span></span>
+              <span
+                className={clsx("opacity-10  duration-1000", {
+                  "opacity-90": scrollPercentage >= 0.7,
+                })}
+              >
+                Ademas de mis estudios formales,
+              </span>
+              <span
+                className={clsx("opacity-10  duration-1000", {
+                  "opacity-90": scrollPercentage >= 0.73,
+                })}
+              >
+                me dedico al aprendizaje autodidacta
+              </span>
+              <span
+                className={clsx("opacity-10  duration-1000", {
+                  "opacity-90": scrollPercentage >= 0.75,
+                })}
+              >
+                para expandir mis conocimientos.
+              </span>
             </p>
           </div>
-
-          <Image
-            className="rounded-lg md:hidden lg:block lg:h-full"
-            src={fotoPerfil}
-            alt="Foto perfil"
-          ></Image>
-
-          <Image
-            className="hidden md:block h-full rounded-lg lg:hidden"
-            src={hobbieAbout}
-            alt="Foto perfil"
-          ></Image>
-        </div>
-        <div className="sm:hidden text-center w-full p-2 rounded-lg col-start-1 col-end-13 bg-gradient-to-br from-portafolio-primario to-portafolio-secundario">
-          <p className="text-portafolio-terciario font-bold  2xl:text-xl">
-            Desarrollador FullStack
-          </p>
-        </div>
-        <div className="background-about-box w-full p-4 rounded-lg col-start-1 col-end-13 sm:col-start-3 sm:row-start-2 sm:row-end-3 md:col-start-3 md:col-end-13 lg:col-end-10 xl:col-start-2">
-          <p className="mb-2 bg-gradient-to-r from-portafolio-primario to-portafolio-secundario inline-block text-transparent bg-clip-text font-bold text-xl  sm:text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl">
-            Tecnologias aprendidas
-          </p>
-          <div className="flex flex-wrap gap-5 justify-start px-2 lg:gap-10">
-            {languages.map((language, index) => {
-              return (
-                <div className="flex flex-col w-10 sm:w-14 md:w-16 gap-1 items-center">
-                  {language.icon}
-                  <p className="text-xs sm:text-base md:text-lg text-portafolio-terciario font-regular">
+          <div className="text-center flex flex-col gap-2">
+            <h3
+              className={clsx(
+                "text-semibold text-portafolio-septimo opacity-10 duration-1000 text-xl",
+                {
+                  "opacity-90": scrollPercentage >= 0.77,
+                }
+              )}
+            >
+              Skills
+            </h3>
+            <div className="flex gap-x-2 gap-y-4 flex-wrap justify-center">
+              {languages.map((language) => {
+                return (
+                  <div className="flex flex-col items-center justify-center w-20">
+                    {language.icon}
                     {language.name}
-                  </p>
-                </div>
-              );
-            })}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-        <div className="bg-slate-900 w-full justify-self-end sm:justify-self-start row-start-2 row-end-3 col-start-8 col-end-12 sm:col-start-1 sm:col-end-3 xl:col-end-2 flex px-4 justify-center items-center rounded-lg flex-col gap-8">
-          <FaGithub className="text-4xl md:text-5xl lg:text-6xl text-portafolio-primario bg-transparent w-8 sm:w-14 md:w-16 lg:w-20" />
-          <FaLinkedin className="text-4xl md:text-5xl lg:text-6xl text-portafolio-primario bg-transparent w-8 sm:w-14 md:w-16 lg:w-20" />
-        </div>
-        <div className="hidden md:flex flex-col  gap-4 row-start-1 row-end-2 lg:row-end-3 col-start-10 col-end-13">
-          <div className="text-center w-full p-2 rounded-lg col-start-1 col-end-13 bg-gradient-to-br from-portafolio-primario to-portafolio-secundario">
-            <p className="text-portafolio-terciario font-bold lg:text-lg  2xl:text-xl">
-              Desarrollador FullStack
-            </p>
-          </div>
-          <Image
-            className="rounded-lg w-full lg:hidden"
-            src={fotoPerfil}
-            alt="Foto perfil"
-          ></Image>
-
-<Image
-            className="rounded-lg w-full hidden lg:block h-full xl:h-auto"
-            src={hobbieAbout}
-            alt="Foto perfil"
-          ></Image>
         </div>
       </div>
-    </div>
+      <div className="p-6" ref={photoPerfilRef}>
+        <div className="relative">
+          <Image
+            className="rounded-lg h-full"
+            src={PhotoPerfil}
+            alt="Foto de perfil"
+          ></Image>
+          <div className="flex flex-col justify-between top-0 absolute bg-slate-900 bg-opacity-30 w-full h-full backdrop-blur-[3px] rounded-lg p-4">
+            <Image src={E} alt="Logo" className="w-8 h-8"></Image>
+            <div className="flex gap-x-4">
+              <button className="bg-white rounded-full flex gap-x-2 items-center justify-start px-3 py-1">
+                <EnvelopeIcon className="bg-portafolio-quinto rounded-full p-1 text-white w-6 h-6"></EnvelopeIcon>
+                <p className="text-sm text-slate-900">Contactate conmigo</p>
+              </button>
+              <div className="flex gap-x-4 items-center rounded-full px-3 py-1 border border-white">
+                <FaGithub className="text-2xl text-white bg-transparent" />
+                <FaLinkedin className="text-2xl  text-white bg-transparent" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
