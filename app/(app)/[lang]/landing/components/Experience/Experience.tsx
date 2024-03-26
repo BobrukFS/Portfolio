@@ -1,14 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import Globant from "@/app/public/images/logoSeidor.png";
-import Image from "next/image";
 import { FaBootstrap, FaCss3Alt, FaHtml5 } from "react-icons/fa6";
 import { SiJavascript } from "react-icons/si";
 import clsx from "clsx";
+import CardExperience from "./components/CardExperience";
 
 const Experience = () => {
   const [currentExp, setCurrentExp] = useState(0);
-  const sectionExp = document.getElementsByClassName("section-exp")
+  const sectionExp = document.getElementsByClassName("section-exp");
+  const navExp = document.getElementsByClassName("nav-exp");
   const jobs = [
     {
       title: "Seidor analytics",
@@ -23,25 +24,25 @@ const Experience = () => {
       languages: [
         {
           icon: (
-            <FaHtml5 className="text-4xl md:text-5xl lg:text-6-xl text-portafolio-secundario bg-transparent w-8 lg:w-20" />
+            <FaHtml5 className="text-portafolio-secundario bg-transparent w-8 h-8" />
           ),
           name: "HTML",
         },
         {
           icon: (
-            <FaCss3Alt className="text-4xl md:text-5xl lg:text-6-xl text-portafolio-secundario bg-transparent w-8 lg:w-20" />
+            <FaCss3Alt className="text-portafolio-secundario bg-transparent w-8 h-8" />
           ),
           name: "CSS",
         },
         {
           icon: (
-            <SiJavascript className="text-4xl md:text-5xl lg:text-6-xl text-portafolio-secundario bg-transparent w-8 lg:w-20" />
+            <SiJavascript className="text-portafolio-secundario bg-transparent w-8 h-8" />
           ),
           name: "JavaScript",
         },
         {
           icon: (
-            <FaBootstrap className="text-4xl md:text-5xl lg:text-6-xl text-portafolio-secundario bg-transparent w-10 lg:w-20" />
+            <FaBootstrap className="text-portafolio-secundario bg-transparent w-10 h-8" />
           ),
           name: "Bootstrap",
         },
@@ -60,25 +61,25 @@ const Experience = () => {
       languages: [
         {
           icon: (
-            <FaHtml5 className="text-4xl md:text-5xl lg:text-6-xl text-portafolio-secundario bg-transparent w-8 lg:w-20" />
+            <FaHtml5 className="text-portafolio-secundario bg-transparent w-8 h-8" />
           ),
           name: "HTML",
         },
         {
           icon: (
-            <FaCss3Alt className="text-4xl md:text-5xl lg:text-6-xl text-portafolio-secundario bg-transparent w-8 lg:w-20" />
+            <FaCss3Alt className="text-portafolio-secundario bg-transparent w-8 h-8" />
           ),
           name: "CSS",
         },
         {
           icon: (
-            <SiJavascript className="text-4xl md:text-5xl lg:text-6-xl text-portafolio-secundario bg-transparent w-8 lg:w-20" />
+            <SiJavascript className="text-portafolio-secundario bg-transparent w-8 h-8" />
           ),
           name: "JavaScript",
         },
         {
           icon: (
-            <FaBootstrap className="text-4xl md:text-5xl lg:text-6-xl text-portafolio-secundario bg-transparent w-10 lg:w-20" />
+            <FaBootstrap className="text-portafolio-secundario bg-transparent w-10 h-8" />
           ),
           name: "Bootstrap",
         },
@@ -97,104 +98,109 @@ const Experience = () => {
       languages: [
         {
           icon: (
-            <FaHtml5 className="text-4xl md:text-5xl lg:text-6-xl text-portafolio-secundario bg-transparent w-8 lg:w-20" />
+            <FaHtml5 className="text-portafolio-secundario bg-transparent w-8 h-8" />
           ),
           name: "HTML",
         },
         {
           icon: (
-            <FaCss3Alt className="text-4xl md:text-5xl lg:text-6-xl text-portafolio-secundario bg-transparent w-8 lg:w-20" />
+            <FaCss3Alt className="text-portafolio-secundario bg-transparent w-8 h-8" />
           ),
           name: "CSS",
         },
         {
           icon: (
-            <SiJavascript className="text-4xl md:text-5xl lg:text-6-xl text-portafolio-secundario bg-transparent w-8 lg:w-20" />
+            <SiJavascript className="text-portafolio-secundario bg-transparent w-8 h-8" />
           ),
           name: "JavaScript",
         },
         {
           icon: (
-            <FaBootstrap className="text-4xl md:text-5xl lg:text-6-xl text-portafolio-secundario bg-transparent w-10 lg:w-20" />
+            <FaBootstrap className="text-portafolio-secundario bg-transparent w-10 h-8" />
           ),
           name: "Bootstrap",
         },
       ],
-    }
+    },
   ];
-
+  const anchoDispositivo = window.screen.width;
   const handleTitleClick = (index) => {
+    console.log(anchoDispositivo);
     setCurrentExp(index);
-  
-    sectionExp[0].style.transform = `translateX(-${100 * index}%)`;
+    if (anchoDispositivo > 1024) {
+      sectionExp[0].style.transform = `translateY(-${100 * index}%)`;
+    } else {
+      sectionExp[0].style.transform = `translateX(-${100 * index}%)`;
+      navExp[0].style.transform = `translateX(-${100 * index}%)`;
+    }
   };
+  const translateArrow = currentExp === 1 ? `translate-y-12 xl:translate-y-14` : currentExp === 2 ? `translate-y-24 xl:translate-y-28` : ""
 
   return (
-    <section className="flex flex-col bg-portafolio-terciario items-center gap-2 overflow-hidden py-6">
-      <h2 className="text-portafolio-secundario text-2xl font-bold ">
-        Experiencia
-      </h2>
-      <div className="flex w-full  bg-portafolio-terciario section-exp translate-0 transition-all duration-500">
-        {jobs.map((job, index) => {
-          return (
-            <div
-              key={index}
-              className="flex flex-col gap-6 p-6 items-center min-w-full"
-            >
-              <p
-                onClick={() => handleTitleClick(index)}
-                className={clsx(
-                  "text-portafolio-primario font-semibold translate-0 transition-all duration-1000 ",
-                  {
-                    "-translate-x-36 text-slate-400 font-regular ": currentExp < index,
-                    "translate-x-36 text-slate-400 font-regular": currentExp > index,
-                  }
-                )}
-              >
-                {job.title}
-              </p>
-              <div className="p-4 min-w-full rounded-lg flex flex-col gap-6 bg-white">
-                <div className="flex justify-between items-center">
-                  <Image
-                    src={Globant}
-                    alt="Imagen logo"
-                    className="w-16 h-10"
-                  ></Image>
-                  <div className="text-end">
-                    <p className="text-sm text-slate-400 font-regular">{job.date}</p>
-                    <p className="text-portafolio-quinto font-bold">
-                      {job.position}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <p className="text-bold text-sm text-portafolio-secundario">
-                    Tareas realizadas
-                  </p>
-                  <ul className="list-disc flex flex-col gap-2 px-6">
-                    {job.tasks.map((task, taskIndex) => {
-                      return (
-                        <li key={taskIndex} className="text-sm text-slate-600">
-                          {task}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-                <div className="flex flex-col gap-2 bg-portafolio-cuaternario p-2 rounded-lg">
-                  <p className="text-bold text-sm text-portafolio-secundario">
-                    Tecnologias utilizadas
-                  </p>
-                  <div className="flex flex-wrap gap-4 items-center">
-                    {job.languages.map((language, langIndex) => {
-                      return <div key={langIndex}>{language.icon}</div>;
-                    })}
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+    <section className="relative flex flex-col justify-center items-center gap-2 py-6 bg-portafolio-terciario overflow-hidden md:min-h-screen lg:flex-row lg:gap-6">
+      <div className="flex flex-col justify-center gap-6">
+        <h2 className="text-portafolio-secundario text-center text-3xl lg:text-4xl xl:text-5xl font-bold ">
+          Mi experiencia
+        </h2>
+        <div className="w-screen max-w-[20rem] overflow-hidden self-center lg:hidden">
+          <div className="nav-exp flex justify-start w-full translate-0 transition-all duration-500">
+            {jobs.map((job, index) => {
+              return (
+                <p
+                  onClick={() => handleTitleClick(index)}
+                  className={clsx(
+                    "min-w-[100%] max-w-[100%] px-6 truncate text-center text-portafolio-primario font-semibold translate-0 transition-all duration-1000",
+                    {
+                      " text-slate-400 text-start text-start font-regular -translate-x-[5rem] text-lg lg:text-xl xl:text-2xl":
+                        currentExp < index,
+                      " text-slate-400 font-regular text-end translate-x-[5rem] text-lg lg:text-xl xl:text-2xl":
+                        currentExp > index,
+                      "text-xl lg:text-2xl xl:text-3xl": currentExp === index,
+                    }
+                  )}
+                >
+                  {job.title}
+                </p>
+              );
+            })}
+          </div>
+        </div>
+        <div className="flex">
+          <div
+            className={clsx("hidden lg:block w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-portafolio-quinto border-b-[12px] transition-all duration-500 border-b-transparent",{
+              "translate-y-1" : currentExp == 0,
+               [translateArrow] : currentExp != 0
+            })}
+          ></div>
+
+          <div className="hidden lg:flex lg:flex-col gap-5">
+            {jobs.map((job, index) => {
+              return (
+                <p
+                  onClick={() => handleTitleClick(index)}
+                  className={clsx(
+                    "text-portafolio-primario min-w-[100%] px-6 truncate text-center font-semibold translate-0 transition-all duration-1000 ",
+                    {
+                      "text-slate-400 font-regular text-lg lg:text-xl xl:text-2xl":
+                        currentExp != index,
+                      "text-xl lg:text-2xl xl:text-3xl": currentExp === index,
+                    }
+                  )}
+                >
+                  {job.title}
+                </p>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <div className="relative flex w-full bg-portafolio-terciario translate-0 transition-all duration-500 lg:flex-col lg:w-auto lg:overflow-hidden lg:max-h-[650px]">
+        <div className="section-exp w-full translate-0 flex transition-all duration-500 lg:max-h-[650px] lg:flex-col ">
+          {jobs.map((job, index) => {
+            return <CardExperience job={job} index={index}></CardExperience>;
+          })}
+        </div>
       </div>
     </section>
   );

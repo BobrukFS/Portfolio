@@ -5,6 +5,8 @@ import clsx from "clsx";
 import E from "@/app/public/images/E.svg";
 import Bobruk from "@/app/public/images/Bobruk.svg";
 import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/app/ui/Button";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scroll, setScroll] = useState("");
@@ -20,7 +22,6 @@ const Header = () => {
       setScroll("scrollBottom");
     }
     prevScrollPos = currentScrollPos;
- 
   }
 
   window.addEventListener("scroll", scrolls);
@@ -28,16 +29,17 @@ const Header = () => {
   return (
     <header
       className={clsx(
-        "fixed top-0 left-0 flex flex-col justify-center w-full max-w-screen p-6 h-24 bg-white transition-all duration-1000 shadow-md z-50",
+        "fixed top-0 left-0 flex flex-col justify-center w-full max-w-screen lg:bg-transparent transition-all duration-1000 shadow-md lg:shadow-none z-50",
         {
           "h-screen": isOpen,
-          "-translate-y-24": scroll === "scrollBottom",
-          "translate-0 p-4 h-20": scroll === "scrollTop",
+          "-translate-y-40 lg:bg-white lg:backdrop-blur-lg": scroll === "scrollBottom",
+          "translate-0 p-2 h-16 backdrop-blur-lg bg-transparent lg:bg-white  lg:backdrop-blur-lg": scroll === "scrollTop",
+          "bg-white h-24 p-6 sm:p-10 lg:p-6 xl:ps-20 lg:py-14 ": scroll == "",
         }
       )}
     >
-      <div className="flex justify-between items-center">
-        <div className="flex items-center gap-x-1">
+      <div className="flex justify-between items-center lg:gap-10">
+        <div className="flex items-center gap-x-1 md:w-2/4">
           <Image src={E} alt="E logo" height={30}></Image>
           <div className="overflow-hidden">
             <Image
@@ -46,15 +48,53 @@ const Header = () => {
                 "-translate-x-36": scroll === "scrollBottom",
                 "-translate-x-32": scroll === "scrollTop",
               })}
-              alt="E logo"
+              alt="Logo portafolio"
               height={30}
             ></Image>
           </div>
+          <nav className="gap-x-4 items-center hidden lg:flex">
+            <Link
+              className="text-md hover:text-portafolio-primario hover:text-lg hover:underline underline-offset-3 transition-all duration-500"
+              href="#"
+            >
+              Sobre mi
+            </Link>
+            <Link
+              className="text-md hover:text-portafolio-primario hover:text-lg hover:underline underline-offset-3 transition-all duration-500"
+              href="#"
+            >
+              Experiencia
+            </Link>
+            <Link
+              className="text-md hover:text-portafolio-primario hover:text-lg hover:underline underline-offset-3 transition-all duration-500"
+              href="#"
+            >
+              Proyectos
+            </Link>
+          </nav>
+        </div>
+        <div className="md:w-2/4 gap-x-4 items-center hidden lg:flex justify-end pe-6 xl:pe-14">
+          <Button
+            text="Contactate conmigo"
+            primaryColor="white"
+            secondaryColor="portafolio-primario"
+            borderColor="white"
+            href="#"
+            icon="message"
+          ></Button>
+          <Button
+            primaryColor="portafolio-primario"
+            secondaryColor="white"
+            borderColor="white"
+            href="#"
+            icon="share"
+            radius
+          ></Button>
         </div>
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`border border-portafolio-cuaternario rounded-full px-3 py-3.5 flex flex-col justify-center items-center ${
+          className={`border bg-white border-portafolio-cuaternario rounded-full px-3 py-3.5 flex flex-col justify-center items-center lg:hidden ${
             isOpen ? "border-portafolio-primario" : ""
           }`}
         >

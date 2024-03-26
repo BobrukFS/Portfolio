@@ -7,12 +7,11 @@ const config: Config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-  
     extend: {
       colors:{
         portafolio :{
           primario : "#F54E38",
-          secundario : "#1A1A1A",
+          secundario : "#333333",
           terciario : "#F6F6F6",
           cuaternario : "#F4F3EB",
           quinto : "#022524",

@@ -4,6 +4,8 @@ import { FaHtml5 } from "react-icons/fa6";
 import Project from "./components/Project";
 import ImageProject from "@/app/public/images/foto-perfil-linkedin.jpg";
 import { motion, useScroll, useTransform } from "framer-motion";
+import OthersProjects from "./components/OthersProjects";
+import WordsSlider from "./components/WordsSlider";
 
 const Projects = () => {
   const container = useRef(null);
@@ -98,11 +100,11 @@ const Projects = () => {
 
   return (
     <>
-      <div className="relative bg-white flex flex-col gap-2 items-center p-6">
-        <h2 className="sticky top-0 text-portafolio-secundario text-2xl font-bold p-6">
-          Proyectos
+      <div className="relative bg-white flex flex-col gap-2 items-center justify-center px-0">
+        <h2 className="top-0 text-portafolio-secundario text-2xl lg:text-4xl xl:text-5xl font-bold p-6">
+          Conoce mis proyectos
         </h2>
-        <div ref={container} className="flex flex-col items-center justify-start gap-y-20">
+        <div ref={container} className="flex flex-col items-center justify-center gap-y-20 pb-6 px-6">
           {projects.map((project, projectIdx) => {
             const targetScale = 1 - (projects.length - projectIdx) * 0.05;
             return (
@@ -120,6 +122,9 @@ const Projects = () => {
             );
           })}
         </div>
+
+        <OthersProjects></OthersProjects>
+       
       </div>
     </>
   );
